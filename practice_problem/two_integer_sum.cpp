@@ -6,14 +6,8 @@ long long solution(int a, int b) {
     if (a == b) return a;
     
     // 2. 대소 비교
-    int start = 0, end = 0;
-    if (a < b) {
-        start = a;
-        end = b;
-    } else if (a > b) {
-        start = b;
-        end = a;
-    }
+    int start = (a < b) ? a : b;
+    int end = (a < b) ? b : a;
     
     // 3. 모든 값을 더해준다.
     long long answer = 0;
