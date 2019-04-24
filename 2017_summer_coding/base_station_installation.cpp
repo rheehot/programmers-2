@@ -1,43 +1,30 @@
 #include <vector>
-#include <cmath>
-#include <iostream>
 using namespace std;
 
-int solution(vector<int> nums) {
-    const int limit = 50 * 1000;
-    vector<bool> isPrimeNum(limit+1, true);
-    for (int i = 2; i < sqrt(limit); i++) {
-        if (!isPrimeNum[i]) continue;
-        for (int j = i*i; j <= limit; j+=i) {
-            if (!isPrimeNum[j]) continue;
-            isPrimeNum[j] = false;
+int solution(int n, vector<int> stations, int w)
+{
+    int i = 0, answer = 0;
+    int left = 1;
+    while (left <= n) {
+        // 왼쪽으로 탐색하면서 기존에 설치된 기지국의 전파가 닿았을때
+        if (i < stations.size() && left >= stations[i] - w) {
+            left = stations[i++] + w + 1;
         }
-    }
-    
-    int answer = 0;
-    int n = (int)nums.size();
-    for (int i = 0; i < n; i++) {
-        int sum = nums[i];
-        for (int j = i+1; j < n; j++) {
-            sum += nums[j];
-            for (int k = j+1; k < n; k++) {
-                sum += nums[k];
-                if (isPrimeNum[sum]) answer++;
-                sum -= nums[k];
+        // 기존에 설치된 기지국의 전파가 닿지 않은 경우..
+        else {
+            int tmpLeft = left + w;
+            // 특별한 경우가 있다.
+            // left가 기존에 설치된 마지막 기지국의 전파 영역에 도달하면
+            // 마지막 기지국 전파 영역을 제외한 가장 오른쪽에 기지국을 설치 한다.
+            // 그리디 알고리즘 .. 오른쪽이 최적의 해 이다.
+            if (i + 1 <= stations.size() - 1 && tmpLeft >= stations[i + 1] - w) {
+                left = stations[i + 1] - w - 1;
             }
-            sum -= nums[j];
+            left = tmpLeft + w + 1;
+            ++answer;
         }
     }
     
     return answer;
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    
-    vector<int> nums = {1, 2, 7, 6, 4};
-    cout << solution(nums) << '\n';
-    return 0;
 }
 
