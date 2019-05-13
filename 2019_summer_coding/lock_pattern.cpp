@@ -6,17 +6,17 @@ using namespace std;
 typedef pair<int, int> POS;
 
 bool isDivide(POS& ap1, POS& ap2, POS& bp1, POS& bp2) {
-    double a1 = ap2.first  - ap1.first;      // x
-    double b1 = ap2.second - ap1.second;     // y
+    double ax = ap2.first  - ap1.first;      // x
+    double ay = ap2.second - ap1.second;     // y
     
-    double cy1 = bp1.second - ap1.second;    // y
-    double cx1 = bp1.first  - ap1.first;     // x
+    double cy1 = bp1.second - ap1.second;
+    double cx1 = bp1.first  - ap1.first;
     
-    double dy1 = bp2.second - ap2.second;
-    double dx1 = bp2.first  - ap2.first;
+    double cy2 = bp2.second - ap2.second;
+    double cx2 = bp2.first  - ap2.first;
     
-    double f1 = a1 * cy1 - b1 * cx1;
-    double f2 = a1 * dy1 - b1 * dx1;
+    double f1 = ax * cy1 - ay * cx1;
+    double f2 = ax * cy2 - ay * cx2;
     
     return (f1 * f2 <= 0) ? true : false;
 }
