@@ -4,7 +4,7 @@
 using namespace std;
 
 // 다른 사람 풀이중에 정렬후, 비교하는 방법을 사용한 풀이가 있었다.
-// 참신해서 풀어봤다. 속도는 hashmap으로 푼 것보다 느리다.
+// 참신해서 풀어봤다. 속도는 hashmap으로 푼 것보다 빠르다.
 string solution(vector<string> participant, vector<string> completion) {
     sort(participant.begin(), participant.end());
     sort(completion.begin(), completion.end());
