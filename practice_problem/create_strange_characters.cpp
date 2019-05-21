@@ -1,36 +1,29 @@
 #include <iostream>
-#include <algorithm>
+#include <string>
 #include <vector>
+
 using namespace std;
 
-// 다른 사람 풀이중에 정렬후, 비교하는 방법을 사용한 풀이가 있었다.
-// 참신해서 풀어봤다. 속도는 hashmap으로 푼 것보다 빠르다.
-string solution(vector<string> participant, vector<string> completion) {
-    sort(participant.begin(), participant.end());
-    sort(completion.begin(), completion.end());
+string solution(string s) {
+    string answer = "";
     
-    for (int i = 0; i < completion.size(); i++) {
-        if (participant[i] != completion[i]) return participant[i];
+    int index = 1;
+    for (int i = 0; i < s.length(); i++, index++) {
+        if (s[i] == ' ') {
+            answer += " ";
+            index = 0;
+            continue;
+        }
+        (index & 1) ? answer += toupper(s[i]) : answer += tolower(s[i]);
     }
     
-    return participant[participant.size()-1];
+    return answer;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
-    vector<string> participant1 = {"leo", "kiki", "eden"};
-    vector<string> participant2 = {"marina", "josipa", "nikola", "vinko", "filipa"};
-    vector<string> participant3 = {"mislav", "stanko", "mislav", "ana"};
-    
-    vector<string> completion1 = {"eden", "kiki"};
-    vector<string> completion2 = {"josipa", "filipa", "marina", "nikola"};
-    vector<string> completion3 = {"stanko", "ana", "mislav"};
-    
-    cout << solution(participant1, completion1) << '\n';
-    cout << solution(participant2, completion2) << '\n';
-    cout << solution(participant3, completion3) << '\n';
-    
+    cout << solution("try hello world") << '\n';
     return 0;
 }
