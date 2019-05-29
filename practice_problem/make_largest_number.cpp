@@ -6,8 +6,7 @@ using namespace std;
 string solution(string number, int k) {
     string answer = "";
     int j = 0;
-    int numberLength = (int)number.length();
-    for (int i = k; i < numberLength; i++) {
+    for (int i = k; i < number.length(); i++) {
         int maxValue = 0;
         int maxIndex = j;
         while (j < i + 1) {
