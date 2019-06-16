@@ -1,36 +1,31 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
+#include <string>
 using namespace std;
 
-// 다른 사람 풀이중에 정렬후, 비교하는 방법을 사용한 풀이가 있었다.
-// 참신해서 풀어봤다. 속도는 hashmap으로 푼 것보다 빠르다.
-string solution(vector<string> participant, vector<string> completion) {
-    sort(participant.begin(), participant.end());
-    sort(completion.begin(), completion.end());
-    
-    for (int i = 0; i < completion.size(); i++) {
-        if (participant[i] != completion[i]) return participant[i];
+bool solution(string s)
+{
+    int count = 0;
+    for (char ch : s) {
+        // count가 음수가 되는것의 의미?
+        // 1. 첫 번째 문자가 ')' 인 경우에는 무조건 올바르지 않은 괄호이다.
+        // 2. '(' 보다 ')' 가 더 많아서 올바르지 않은 괄호이다.
+        if (count < 0) return false;
+        (ch == '(') ? count++ : count--;
     }
-    
-    return participant[participant.size()-1];
+    return count == 0;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
-    vector<string> participant1 = {"leo", "kiki", "eden"};
-    vector<string> participant2 = {"marina", "josipa", "nikola", "vinko", "filipa"};
-    vector<string> participant3 = {"mislav", "stanko", "mislav", "ana"};
-    
-    vector<string> completion1 = {"eden", "kiki"};
-    vector<string> completion2 = {"josipa", "filipa", "marina", "nikola"};
-    vector<string> completion3 = {"stanko", "ana", "mislav"};
-    
-    cout << solution(participant1, completion1) << '\n';
-    cout << solution(participant2, completion2) << '\n';
-    cout << solution(participant3, completion3) << '\n';
+    cout << solution("()()") << '\n';
+    cout << solution("(())()") << '\n';
+    cout << solution(")()(") << '\n';
+    cout << solution("(()(") << '\n';
+    cout << solution("))))))") << '\n';
+    cout << solution("((((((") << '\n';
+    cout << solution("((())))") << '\n';
     
     return 0;
 }
