@@ -11,20 +11,11 @@ vector<int> solution(vector<int> prices) {
     
     int end = (int)prices.size();
     for (int sec = 1; sec <= end; sec++) {
-        if (st.empty()) {
-            st.push(make_pair(sec, prices[sec-1]));
-            continue;
+        while (!st.empty() && st.top().second > prices[sec-1]) {
+            answer[st.top().first-1] = (sec - st.top().first);
+            st.pop();
         }
-        
-        if (st.top().second < prices[sec-1]) {
-            st.push(make_pair(sec, prices[sec-1]));
-        } else {
-            while (!st.empty() && st.top().second > prices[sec-1]) {
-                answer[st.top().first-1] = (sec - st.top().first);
-                st.pop();
-            }
-            st.push(make_pair(sec, prices[sec-1]));
-        }
+        st.push(make_pair(sec, prices[sec-1]));
     }
     
     while (!st.empty()) {
