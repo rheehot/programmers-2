@@ -6,6 +6,24 @@
 
 using namespace std;
 
+// Data가 많은 경우에서는 DFS가 BFS보다 약 3배 빠름
+// BFS          DFS
+// 22.43ms      6.58ms
+// 20.93ms      6.49ms
+// Data가 적은 경우에서는 별 차이 없음
+
+// DFS 풀이
+int dfs(vector<int>& numbers, int target, int index, int value) {
+    if (index == numbers.size()) {
+        if (value == target) return 1;
+        else return 0;
+    }
+    int answer = 0;
+    answer += dfs(numbers, target, index + 1, value + numbers[index]);
+    answer += dfs(numbers, target, index + 1, value - numbers[index]);
+    return answer;
+}
+
 // BFS 풀이
 int bfs(vector<int>& numbers, int target) {
     queue<pair<int, int> > q;
@@ -31,7 +49,8 @@ int bfs(vector<int>& numbers, int target) {
 }
 
 int solution(vector<int> numbers, int target) {
-    return bfs(numbers, target);
+    //    return bfs(numbers, target);
+    return dfs(numbers, target, 0, 0);
 }
 
 int main() {
