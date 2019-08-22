@@ -6,7 +6,8 @@
 
 using namespace std;
 
-// Data가 많은 경우에서는 DFS가 BFS보다 약 3배 빠름
+// Data가 많은 경우에서는 DFS로 구현한 코드가 BFS로 구현한 코드보다 약 3배 빠름
+// 이 코드에서 그렇다는 것이지 DFS가 BFS보다 빠른 알고리즘이라는 것이 아님
 // BFS          DFS
 // 22.43ms      6.58ms
 // 20.93ms      6.49ms
