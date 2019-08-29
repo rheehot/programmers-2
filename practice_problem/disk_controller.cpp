@@ -6,6 +6,7 @@
 #include <queue>
 
 using namespace std;
+
 struct Disk {
     int requestTime;
     int processTime;
