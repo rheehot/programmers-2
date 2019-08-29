@@ -46,7 +46,8 @@ int solution(vector<vector<int>> jobs) {
     int prevTime = 0;
     int currenJob = 0;
     for (int currentTime = 0; currentTime <= totalTime; currentTime++) {
-        // 같은 시간에 요청하는 시간이 여러 개 있는 경우를 생각해서 while문
+        // 같은 시간에 요청하는 시간이 여러 개 있는 경우를 생각해야 한다.
+        // while문 통해 현재 요청 시간을 모두 우선순위 큐에 담는다.
         while (index < disks.size() && currentTime == disks[index].requestTime) {
             pq.push(disks[index++]);
         }
