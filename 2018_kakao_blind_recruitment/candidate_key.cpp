@@ -12,7 +12,7 @@ using namespace std;
 
 void makeCombination(vector<vector<int> >& combinations, vector<int> order, vector<int> value, int index, int columnSize, bool flag) {
     if (index == columnSize) return;
-    if (flag == true) {
+    if (flag) {
         value.push_back(order[index]);
         combinations.push_back(value);
     }
