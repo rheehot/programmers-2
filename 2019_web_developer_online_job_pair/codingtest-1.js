@@ -35,29 +35,21 @@ goods	boxes	answer
 
 */
 
-// 일반 테스트 케이스는 모두 통과했지만, 효율성 케이스에서 하나도 통과하지 못함
-// 68점..
+// 처음에 효율성 케이스에서 통과하지 못해서 다시 풀었다.
 
 function solution(goods, boxes){
-    goods.sort();
-    boxes.sort();
-    const checkArr = [];    
+    goods.sort((a, b) => { return b - a; });
+    boxes.sort((a, b) => { return b - a; }); 
     let answer = 0, j = 0;
-    for (let i = 0; i < goods.length; i++) {
-        for (let j = 0; j < boxes.length; j++) {
-            if (checkArr[j]) continue;
-            if (goods[i] <= boxes[j]) {
-                checkArr[j] = true;
-                answer++;
-                break;
-            }
+    for (let i = 0; i < goods.length;) {
+        if (goods[i] <= boxes[j]) {
+            answer++;
+            i++;
+            j++;
+        } else {
+            i++;
         }
-        // let low = 0, high = boxes.length;
-        // while (low <= high) {
-        //     let mid = parseInt(low + high / 2);
-        // }
     }
-    
     return answer;
 }
 
