@@ -10,7 +10,7 @@ function solution3(sticker) {
     }
 
     dp[0][0] = sticker[0];
-    dp[0][1] = 0;
+    dp[1][0] = 0;
 
     for (let i = 1; i < stickerLength; i++) {
         dp[0][i] = dp[1][i-1] + sticker[i];
