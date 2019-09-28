@@ -1,4 +1,4 @@
-// 10분만 더 있어으면 풀었을텐데 ㅠㅠㅠㅠ
+// 5분만 더 있었으면 풀었을텐데 ㅠㅠㅠㅠ
 
 function solution3(sticker) {
     const dp = [[], []];
