@@ -25,17 +25,39 @@ int solution(string skill, vector<string> skill_trees) {
     return answer;
 }
 
+// 두 번째 풀이
+int solution2(string skill, vector<string> skill_trees) {
+    int answer = 0;
+    for (string skillTree : skill_trees) {
+        string temp = "";
+        for (char ch : skillTree) {
+            if (skill.find(ch) != string::npos) {
+                temp += ch;
+            }
+        }
+
+        size_t tempLength = temp.length();
+        if (skill.substr(0,  tempLength) == temp) {
+            answer++;
+        }
+    }
+    return answer;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
     string skill = "CBD";
+    
     vector<string> skill_trees;
     skill_trees.push_back("BACDE");
     skill_trees.push_back("CBADF");
     skill_trees.push_back("AECB");
     skill_trees.push_back("BDA");
+    
     cout << solution(skill, skill_trees) << '\n';
+    cout << solution2(skill, skill_trees) << '\n';
     
     return 0;
 }
