@@ -1,4 +1,5 @@
-#include <string>
+// 첫 번째 풀이
+/* #include <string>
 #include <tuple>
 #include <set>
 using namespace std;
@@ -39,4 +40,56 @@ int solution(string dirs)
     }
     
     return (int)(chk.size() / 2);
+}*/
+
+// 두 번째 풀이
+#include <iostream>
+#include <string>
+#include <vector>
+#include <tuple>
+#include <set>
+
+using namespace std;
+
+pair<int, int> getPos(char dir) {
+    if (dir == 'U') return make_pair(1, 0);
+    if (dir == 'L') return make_pair(0, -1);
+    if (dir == 'R') return make_pair(0, 1);
+    return make_pair(-1, 0);
+}
+
+int solution(string dirs) {
+    set<tuple<int, int, int, int> > visited;
+    
+    int answer = 0;
+    int x = 0, y = 0;
+    for (char dir : dirs) {
+        pair<int, int> pos = getPos(dir);
+        
+        int nextX = x + pos.first;
+        int nextY = y + pos.second;
+        
+        if (nextX < -5 || nextX > 5 || nextY < -5 || nextY > 5) continue;
+        
+        if (visited.count(make_tuple(x, y, nextX, nextY)) == 0) {
+            visited.insert(make_tuple(x, y, nextX, nextY));
+            visited.insert(make_tuple(nextX, nextY, x, y));
+            answer++;
+        }
+        
+        x = nextX;
+        y = nextY;
+    }
+    
+    return answer;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    cout << solution("ULURRDLLU") << '\n';
+    cout << solution("LULLLLLLU") << '\n';
+    
+    return 0;
 }
