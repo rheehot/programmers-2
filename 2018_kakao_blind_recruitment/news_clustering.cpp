@@ -8,14 +8,14 @@
 using namespace std;
 
 vector<string> split(string str) {
-    vector<string> temp;
+    vector<string> result;
     
     for (int i = 0; i < str.length()-1; i++) {
-        string tempStr = str.substr(i, 2);
+        string s = str.substr(i, 2);
         
         // 영문에서 소문자, 대문자가 아닌 경우
         bool check = true;
-        for (char ch : tempStr) {
+        for (char ch : s) {
             if (('a' > ch || ch > 'z') && ('A' > ch || ch > 'Z')) {
                 check = false;
                 break;
@@ -24,13 +24,9 @@ vector<string> split(string str) {
         
         if (!check) continue;
         
-        temp.push_back(tempStr);
-    }
-    
-    // 소문자를 영문자로 변환
-    vector<string> result;
-    for (string s : temp) {
+        // 소문자를 영문자로 변환
         transform(s.begin(), s.end(), s.begin(), ::toupper);
+        
         result.push_back(s);
     }
     
