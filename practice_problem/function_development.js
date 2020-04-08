@@ -4,7 +4,7 @@ function solution(progresses, speeds) {
   while (progresses.length) {
     let deployCount = 0;
 
-    while (progresses[0] >= 100) {
+    while (progresses.length && progresses[0] >= 100) {
       progresses.shift();
       speeds.shift();
       deployCount++;
