@@ -1,11 +1,13 @@
 function rotated(key) {
   const keySize = key.length;
   const rotatedKey = Array.from(Array(keySize), () => Array());
+
   for (let r = 0; r < keySize; r++) {
     for (let c = 0; c < keySize; c++) {
       rotatedKey[c][keySize - 1 - r] = key[r][c];
     }
   }
+
   return rotatedKey;
 }
 
@@ -15,17 +17,17 @@ function isUnlock(key, lock, r, c) {
   const boardSize = lockSize + keySize * 2 - 2;
   const board = Array.from(Array(boardSize), () => Array());
 
-  for (let r = 0; r < board.length; r++) {
-    for (let c = 0; c < board.length; c++) {
-      const lR = r - (keySize - 1);
-      const lC = c - (keySize - 1);
+  for (let bR = 0; bR < board.length; bR++) {
+    for (let bC = 0; bC < board.length; bC++) {
+      const lR = bR - (keySize - 1);
+      const lC = bC - (keySize - 1);
 
       if (0 <= lR && lR < lockSize && 0 <= lC && lC < lockSize) {
-        board[r][c] = lock[lR][lC];
+        board[bR][bC] = lock[lR][lC];
         continue;
       }
 
-      board[r][c] = 0;
+      board[bR][bC] = 0;
     }
   }
 
@@ -48,12 +50,11 @@ function solution(key, lock) {
   const keySize = key.length;
   const lockSize = lock.length;
   const boardSize = lockSize + keySize * 2 - 2;
+
   for (let rotate = 0; rotate < 4; rotate++) {
     for (let r = 0; r <= boardSize - keySize; r++) {
       for (let c = 0; c <= boardSize - keySize; c++) {
-        if (isUnlock(key, lock, r, c)) {
-          return true;
-        }
+        if (isUnlock(key, lock, r, c)) return true;
       }
     }
     key = rotated(key);
