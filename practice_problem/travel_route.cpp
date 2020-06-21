@@ -1,5 +1,7 @@
 /*
  주어진 모든 항공권을 다 써야하는게 핵심 -> 즉, DFS에 백트래킹 문제이다.
+ 또한, 똑같은 항공권이 존재할 수 있기 때문에 "map<pair<string, string>, boolean> visited"이 아닌
+ "map<pair<string string>, int> visited"로 해야한다.
 
  ex)
  티켓 : [["ICN", "COO"], ["ICN", "BOO"], ["COO", "ICN"], ["BOO", "DOO"]]
