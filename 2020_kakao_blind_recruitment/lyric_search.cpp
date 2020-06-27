@@ -42,11 +42,11 @@ struct Trie {
     
     int find(const char* key) {
         if (*key == '?') {
-            int tempCount = 0;
+            int totalCount = 0;
             for (int i = 0; i < 26; i++) {
-                if (next[i] != NULL) tempCount += next[i]->count;
+                if (next[i] != NULL) totalCount += next[i]->count;
             }
-            return tempCount;
+            return totalCount;
         }
         
         int current = *key - 'a';
